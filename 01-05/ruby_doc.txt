@@ -1,0 +1,13 @@
+String Methods:
+chop - returns the string with last character removed
+tr - can switch the characters in a string as defined by the user
+
+Symbol Methods:
+id2name - returns the name or string corresponding to the symbol
+symbol <=> other_symbol - compares one symbol to the other indicated symbol
+
+Enumerable Method:
+sort
+
+Sorts enumerated items into an array, can be used to count a set amount of numbers or sort the names of people or objects alphabetically.
+Could be easier and quicker to a long list than to do so manually, i.e. a roster for a company, or a long list of numbers.

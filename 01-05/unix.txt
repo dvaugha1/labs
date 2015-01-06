@@ -1,0 +1,3 @@
+printenv
+
+When printenv is entered into the terminal,the terminal will show the names and values of variables in the environment.  When the variables are printed, they are shown one per line.  The variables include what Shell is currently being used in the terminal, which user is logged in, the Path, and many more.
