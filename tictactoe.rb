@@ -187,16 +187,3 @@ end
 
 
 player_choose(spaces, playerx, playero, comp)
-
-
-=begin
-while true
-  puts "Play again?  Enter y for yes and n for no"
-  play_again = gets.chomp.downcase
-  if (play_again == "y")
-    tictactoe
-  else
-    break
-  end
-end
-=end
