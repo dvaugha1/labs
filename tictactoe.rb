@@ -1,7 +1,8 @@
-spaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-win = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"], ["1", "4", "7"], ["2", "5", "8"], ["3", "6", "9"], ["1", "5", "9"], ["3", "5", "7"]]
+spaces = ["1", "2", "3", "4", "5" , "6", "7", "8", "9"]
+WIN = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
 playerx = "X"
 playero = "O"
+comp = "O"
 
 def welcome
   puts "Welcome to Tic-Tac-Toe"
@@ -11,7 +12,7 @@ end
 def userx_input(spaces, playerx)
   print "Player X: Please input a number from 1 through 9: "
   input = gets.chomp
-  if input == "1"
+  if input== "1"
     spaces.map! { |x| x == "1" ? playerx : x }
   end
   if input == "2"
@@ -72,6 +73,37 @@ def usero_input (spaces, playero)
   end
 end
 
+def comp (spaces, comp)
+ input = spaces.sample.to_s
+ if input == "1"
+   spaces.map! { |x| x == "1" ? comp : x }
+ end
+ if input == "2"
+   spaces.map! { |x| x == "2" ? comp : x }
+ end
+ if input == "3"
+   spaces.map! { |x| x == "3" ? comp : x }
+ end
+ if input == "4"
+   spaces.map! { |x| x == "4" ? comp : x }
+ end
+ if input == "5"
+   spaces.map! { |x| x == "5" ? comp : x }
+ end
+ if input == "6"
+   spaces.map! { |x| x == "6" ? comp : x }
+ end
+ if input == "7"
+   spaces.map! { |x| x == "7" ? comp : x }
+ end
+ if input == "8"
+   spaces.map! { |x| x == "8" ? comp : x }
+ end
+ if input == "9"
+   spaces.map! { |x| x == "9" ? comp : x }
+ end
+end
+
 def display(spaces)
   system "clear"
   spaces.each_index do |x|
@@ -81,83 +113,82 @@ def display(spaces)
       print " [#{spaces[x]}]"
       end
   end
-  puts
 end
 
-def game_over(spaces)
-  if spaces[0..2] == ["X", "X", "X"]
-    puts "X wins"
-  end
-  if spaces[3..5] == ["X", "X", "X"]
-    puts "X wins"
-  end
-  if spaces[6..8] == ["X", "X", "X"]
-    puts "X wins"
-  end
-  if spaces[6] + spaces[3] + spaces[0] == ["X, X, X"]
-    puts "X wins"
-  end
-  if spaces[7] + spaces[4] + spaces[1] == ["X, X, X"]
-    puts "X wins"
-  end
-  if spaces[8] + spaces[5] + spaces[2] == ["X, X, X"]
-    puts "X wins"
-  end
-  if spaces[8] + spaces[4] + spaces[0] == ["X, X, X"]
-    puts "X wins"
-  end
-  if spaces[6] + spaces[4] + spaces[2] == ["X, X, X"]
-    puts "X wins"
-  end
-  if spaces[0..2] == ["O", "O", "O"]
-    puts "O wins"
-  end
-  if spaces[3..5] == ["O", "O", "O"]
-    puts "O wins"
-  end
-  if spaces[6..8] == ["O", "O", "O"]
-    puts "O wins"
-  end
-  if spaces[6] + spaces[3] + spaces[0] == ["O, O, O"]
-    puts "O wins"
-  end
-  if spaces[7] + spaces[4] + spaces[1] == ["O, O, O"]
-    puts "O wins"
-  end
-  if spaces[8] + spaces[5] + spaces[2] == ["O, O, O"]
-    puts "O wins"
-  end
-  if spaces[8] + spaces[4] + spaces[0] == ["O, O, O"]
-    puts "O wins"
-  end
-  if spaces[6] + spaces[4] + spaces[2] == ["O, O, O"]
-    puts "O wins"
-  end
+def win?(spaces)
+  WIN.any? do |a, b, c|
+  if spaces[a] == spaces[b] && spaces[b] == spaces[c]
+  return spaces[a]
+end
+end
 end
 
-def tictactoe(spaces, playerx, playero)
-  until game_over(spaces) do
-  display(spaces)
-  userx_input(spaces, playerx)
-  display(spaces)
-  if game_over(spaces)
-    puts "X Wins"
-  else
-    usero_input(spaces, playero)
-    if game_over(spaces)
-      puts "O wins"
-    end
+
+def tictactoep2p(spaces, playerx, playero)
+  turn_count = 1
+  until win?(spaces) || turn_count == 10 do
     display(spaces)
-  end
-  if game_over(spaces) == true
-    break
+    userx_input(spaces, playerx)
+    turn_count += 1
+    display(spaces)
+    if win?(spaces)
+      puts "X Wins"
+    elsif
+      turn_count == 10
+      puts "It's a draw!"
+    else
+      usero_input(spaces, playero)
+      turn_count +=1
+      if win?(spaces)
+        puts "O wins"
+      end
+    end
+    if win?(spaces) == true
+      break
+    end
   end
 end
+
+def tictactoecomp(spaces, playerx, comp)
+  turn_count = 1
+  until win?(spaces) || turn_count == 10 do
+    display(spaces)
+    userx_input(spaces, playerx)
+    turn_count += 1
+    display(spaces)
+    if win?(spaces)
+      puts "X Wins"
+    elsif
+      turn_count == 10
+      puts "It's a draw!"
+    else
+      comp(spaces, comp)
+      turn_count +=1
+      if win?(spaces)
+        puts "O wins"
+      end
+    end
+    if win?(spaces) == true
+      break
+    end
+  end
+end
+
+def player_choose(spaces, playerx, playero, comp)
+  welcome
+  puts "Please choose to play human(1) or computer(2):"
+  input = gets.chomp
+  if input == "1"
+    tictactoep2p(spaces, playerx, playero)
+  else
+    tictactoecomp(spaces, playerx, comp)
+  end
 end
 
 
+player_choose(spaces, playerx, playero, comp)
 
-tictactoe(spaces, playerx, playero)
+
 =begin
 while true
   puts "Play again?  Enter y for yes and n for no"
