@@ -9,100 +9,117 @@ def welcome
   puts ""
 end
 
-def userx_input(spaces, playerx)
+class Player
+  def initialize
+    @playerx = "X"
+    @playero = "O"
+  end
+def inputx(spaces)
   print "Player X: Please input a number from 1 through 9: "
   input = gets.chomp
   if input== "1"
-    spaces.map! { |x| x == "1" ? playerx : x }
+    spaces.map! { |x| x == "1" ? @playerx : x }
   end
   if input == "2"
-    spaces.map! { |x| x == "2" ? playerx : x }
+    spaces.map! { |x| x == "2" ? @playerx : x }
   end
   if input == "3"
-    spaces.map! { |x| x == "3" ? playerx : x }
+    spaces.map! { |x| x == "3" ? @playerx : x }
   end
   if input == "4"
-    spaces.map! { |x| x == "4" ? playerx : x }
+    spaces.map! { |x| x == "4" ? @playerx : x }
   end
   if input == "5"
-    spaces.map! { |x| x == "5" ? playerx : x }
+    spaces.map! { |x| x == "5" ? @playerx : x }
   end
   if input == "6"
-    spaces.map! { |x| x == "6" ? playerx : x }
+    spaces.map! { |x| x == "6" ? @playerx : x }
   end
   if input == "7"
-    spaces.map! { |x| x == "7" ? playerx : x }
+    spaces.map! { |x| x == "7" ? @playerx : x }
   end
   if input == "8"
-    spaces.map! { |x| x == "8" ? playerx : x }
+    spaces.map! { |x| x == "8" ? @playerx : x }
   end
   if input == "9"
-    spaces.map! { |x| x == "9" ? playerx : x }
+    spaces.map! { |x| x == "9" ? @playerx : x }
   end
 end
 
-def usero_input (spaces, playero)
+def inputo (spaces)
   print "Player O: Please input a number from 1 through 9: "
   input = gets.chomp
   if input == "1"
-    spaces.map! { |x| x == "1" ? playero : x }
+    spaces.map! { |x| x == "1" ? @playero : x }
   end
   if input == "2"
-    spaces.map! { |x| x == "2" ? playero : x }
+    spaces.map! { |x| x == "2" ? @playero : x }
   end
   if input == "3"
-    spaces.map! { |x| x == "3" ? playero : x }
+    spaces.map! { |x| x == "3" ? @playero : x }
   end
   if input == "4"
-    spaces.map! { |x| x == "4" ? playero : x }
+    spaces.map! { |x| x == "4" ? @playero : x }
   end
   if input == "5"
-    spaces.map! { |x| x == "5" ? playero : x }
+    spaces.map! { |x| x == "5" ? @playero : x }
   end
   if input == "6"
-    spaces.map! { |x| x == "6" ? playero : x }
+    spaces.map! { |x| x == "6" ? @playero : x }
   end
   if input == "7"
-    spaces.map! { |x| x == "7" ? playero : x }
+    spaces.map! { |x| x == "7" ? @playero : x }
   end
   if input == "8"
-    spaces.map! { |x| x == "8" ? playero : x }
+    spaces.map! { |x| x == "8" ? @playero : x }
   end
   if input == "9"
-    spaces.map! { |x| x == "9" ? playero : x }
+    spaces.map! { |x| x == "9" ? @playero : x }
   end
 end
+end
 
-def comp (spaces, comp)
+class Comp
+  def initialize
+  @comp = "O"
+  end
+def choose (spaces)
  input = spaces.sample.to_s
  if input == "1"
-   spaces.map! { |x| x == "1" ? comp : x }
+   spaces.map! { |x| x == "1" ? @comp : x }
  end
  if input == "2"
-   spaces.map! { |x| x == "2" ? comp : x }
+   spaces.map! { |x| x == "2" ? @comp : x }
  end
  if input == "3"
-   spaces.map! { |x| x == "3" ? comp : x }
+   spaces.map! { |x| x == "3" ? @comp : x }
  end
  if input == "4"
-   spaces.map! { |x| x == "4" ? comp : x }
+   spaces.map! { |x| x == "4" ? @comp : x }
  end
  if input == "5"
-   spaces.map! { |x| x == "5" ? comp : x }
+   spaces.map! { |x| x == "5" ? @comp : x }
  end
  if input == "6"
-   spaces.map! { |x| x == "6" ? comp : x }
+   spaces.map! { |x| x == "6" ? @comp : x }
  end
  if input == "7"
-   spaces.map! { |x| x == "7" ? comp : x }
+   spaces.map! { |x| x == "7" ? @comp : x }
  end
  if input == "8"
-   spaces.map! { |x| x == "8" ? comp : x }
+   spaces.map! { |x| x == "8" ? @comp : x }
  end
  if input == "9"
-   spaces.map! { |x| x == "9" ? comp : x }
+   spaces.map! { |x| x == "9" ? @comp : x }
  end
 end
+end
+
+class Game
+  def initialize(tictactoep2p, tictactoecomp)
+    @tictactoep2p = tictactoep2p
+    @tictactoecomp = tictactoecomp
+  end
 
 def display(spaces)
   system "clear"
@@ -124,11 +141,11 @@ end
 end
 
 
-def tictactoep2p(spaces, playerx, playero)
+def @tictactoep2p(spaces)
   turn_count = 1
   until win?(spaces) || turn_count == 10 do
     display(spaces)
-    userx_input(spaces, playerx)
+    Player.inputx(spaces)
     turn_count += 1
     display(spaces)
     if win?(spaces)
@@ -137,7 +154,7 @@ def tictactoep2p(spaces, playerx, playero)
       turn_count == 10
       puts "It's a draw!"
     else
-      usero_input(spaces, playero)
+      Player.inputo(spaces)
       turn_count +=1
       if win?(spaces)
         puts "O wins"
@@ -149,11 +166,11 @@ def tictactoep2p(spaces, playerx, playero)
   end
 end
 
-def tictactoecomp(spaces, playerx, comp)
+def @tictactoecomp(spaces)
   turn_count = 1
   until win?(spaces) || turn_count == 10 do
     display(spaces)
-    userx_input(spaces, playerx)
+    Player.inputx(spaces)
     turn_count += 1
     display(spaces)
     if win?(spaces)
@@ -162,7 +179,7 @@ def tictactoecomp(spaces, playerx, comp)
       turn_count == 10
       puts "It's a draw!"
     else
-      comp(spaces, comp)
+      Comp.choose(spaces)
       turn_count +=1
       if win?(spaces)
         puts "O wins"
@@ -173,17 +190,18 @@ def tictactoecomp(spaces, playerx, comp)
     end
   end
 end
+end
 
-def player_choose(spaces, playerx, playero, comp)
+def player_choose(spaces)
   welcome
   puts "Please choose to play human(1) or computer(2):"
   input = gets.chomp
   if input == "1"
-    tictactoep2p(spaces, playerx, playero)
+    Game.tictactoep2p(spaces)
   else
-    tictactoecomp(spaces, playerx, comp)
+    Game.tictactoecomp(spaces)
   end
 end
 
 
-player_choose(spaces, playerx, playero, comp)
+player_choose(spaces)
