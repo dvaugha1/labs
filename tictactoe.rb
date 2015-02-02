@@ -128,5 +128,6 @@ def player_choose(spaces)
   end
 end
 
+puts "Hi Friends"
 
 player_choose(spaces)
